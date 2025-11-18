@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Практика №1. Приложение для тестирования✅</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    
+    <main>
+        <section class="container">
+            <button class="start_test">🚀Начать тестирование🚀</button>
+        </section>
+
+        <section class="container">
+            <div class="question">
+                <h2>Вопрос №1.</h2>
+                <p>Что выведет этот код? <code>console.log(typeof null);</code></p>
+            </div>
+
+            <ul class="answer_list">
+                <li class="li_answer_1">
+                    <input id="answer_id_1" type="radio" class="question_input">
+                    <label for="answer_id_1" class="question_label">
+                        <p>null</p>
+                    </label>
+                </li>
+
+                <li class="li_answer_2">
+                    <input id="answer_id_2" type="radio" class="question_input">
+                    <label for="answer_id_2" class="question_label">
+                        <p>object</p>
+                    </label>
+                </li>
+
+                <li class="li_answer_3">
+                    <input id="answer_id_3" type="radio" class="question_input">
+                    <label for="answer_id_3" class="question_label">
+                        <p>undefined</p>
+                    </label>
+                </li>
+            </ul>
+        </section>
+    </main>
 </body>
+
 </html>

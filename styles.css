@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  color: #fffafa;
+}
+
+body {
+  background-color: #48467a;
+}
+
+.container {
+  max-width: 1050px;
+  width: 100%;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.start_test {
+  width: 100%;
+  height: 300px;
+  border-radius: 32px;
+  background-color: #6c69a1;
+  border: 0px;
+}
