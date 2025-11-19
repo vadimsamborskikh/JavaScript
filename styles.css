@@ -23,4 +23,243 @@ body {
   border-radius: 32px;
   background-color: #6c69a1;
   border: 0px;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+/* .question_field {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.question {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.answer_grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.answer_grid .answer input {
+  display: none;
+}
+
+.answer-radio {
+  font-size: inherit;
+  margin: 0;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.answer {
+  background-color: #6c69a1;
+  border: 1px solid white;
+  border-radius: 12px;
+  padding: 100px 120px;
+  cursor: pointer;
+  transition: background 0.2s ease-out, border-color 0.2s ease-out;
+} */
+
+.quiz-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+}
+
+.question {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.question-code {
+  display: inline-block;
+  background: #f7fafc;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: "Courier New", monospace;
+  color: #e53e3e;
+  border: 1px solid #e2e8f0;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+/* Стили для карточек-ответов */
+.option-card {
+  position: relative;
+  padding: 20px 24px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.option-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  transition: left 0.6s;
+}
+
+.option-card:hover {
+  border-color: #4299e1;
+  background: #f7faff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(66, 153, 225, 0.15);
+}
+
+.option-card:hover::before {
+  left: 100%;
+}
+
+.option-card:active {
+  transform: translateY(0);
+}
+
+/* Состояние выбранной карточки */
+.option-card.selected {
+  border-color: #4299e1;
+  background: #ebf8ff;
+  box-shadow: 0 8px 25px rgba(66, 153, 225, 0.2);
+}
+
+.option-card.selected .option-content::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Скрываем нативный radio input */
+.option-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+/* Кастомный индикатор выбора */
+.option-content::after {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  width: 24px;
+  height: 24px;
+  background: #4299e1;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.option-number {
+  width: 32px;
+  height: 32px;
+  background: #edf2f7;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.option-card.selected .option-number {
+  background: #4299e1;
+  border-color: #4299e1;
+  color: white;
+}
+
+.option-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  transition: color 0.3s ease;
+}
+
+.option-card.selected .option-text {
+  color: #2b6cb0;
+}
+
+.option-type {
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  color: #718096;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* Кнопка отправки */
+.submit-btn {
+  width: 100%;
+  padding: 16px 32px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+  background: #38a169;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
