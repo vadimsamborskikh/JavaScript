@@ -1,83 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Практика №1. Приложение для тестирования✅</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <main>
-      <section class="container">
-        <button class="start_test">🚀Начать тестирование🚀</button>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Практика №1. Приложение для тестирования✅</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+</head>
 
-      <section class="container question_field">
-        <div class="question">
-          <h2>Вопрос №1.</h2>
-          <p>Что выведет этот код? <code>console.log(typeof null);</code></p>
-        </div>
+<body>
+  <main>
+  <section class="container" id="app-container">
+    
+  </section>
+</main>
+  <script src="./script.js"></script>
+</body>
 
-        <!-- <div class="answer_grid">
-          <label class="answer">
-            <input type="radio" class="answer_radio" />
-            <p class="answer_text">null</p>
-          </label>
-
-          <label class="answer">
-            <input type="radio" class="answer_radio" />
-            <p class="answer_text">object</p>
-          </label>
-
-          <label class="answer">
-            <input type="radio" class="answer_radio" />
-            <p class="answer_text">undefined</p>
-          </label>
-        </div>
-        
-        -->
-        <div class="quiz-container">
-          <div class="question">
-            Что вернет <span class="question-code">typeof null</span> в
-            JavaScript?
-          </div>
-
-          <div class="options-container">
-            <label class="option-card">
-              <input type="radio" name="answer" value="null" />
-              <div class="option-content">
-                <div class="option-number">1</div>
-                <span class="option-text">Null</span>
-              </div>
-            </label>
-
-            <label class="option-card">
-              <input type="radio" name="answer" value="object" />
-              <div class="option-content">
-                <div class="option-number">2</div>
-                <span class="option-text">Object</span>
-              </div>
-            </label>
-
-            <label class="option-card">
-              <input type="radio" name="answer" value="undefined" />
-              <div class="option-content">
-                <div class="option-number">3</div>
-                <span class="option-text">Undefined</span>
-              </div>
-            </label>
-          </div>
-
-          <button class="submit-btn" disabled>Подтвердить ответ</button>
-        </div>
-      </section>
-    </main>
-  </body>
 </html>
