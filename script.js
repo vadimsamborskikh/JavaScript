@@ -49,7 +49,7 @@ function showQuestion(number) {
   const optionsHTML = currentQuestion.options
     .map((option, index) => {
       return `<label class="option-card">
-              <input type="radio" name="answer" value="null" />
+              <input type="radio" name="answer" value="${option}" />
               <div class="option-content">
                 <p class="option-number">${index + 1}</p>
                 <span class="option-text">${option}</span>
@@ -78,7 +78,19 @@ function showQuestion(number) {
 
   radioButtons.forEach((value) => {
     value.addEventListener("change", function () {
-      submitButton.removeAttribute("disabled");
+      submitButton.disabled = false;
     });
   });
-}
+};
+
+// function handleSubmit () {
+//   const currentAnswer = document.querySelectorAll('option-text');
+  
+//   for (let el in currentAnswer) {
+//     console.log(el);
+//   }
+  
+  
+// };
+
+
