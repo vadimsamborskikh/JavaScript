@@ -26,37 +26,39 @@ const questions = [
 ];
 
 function showStartScreen() {
-  const container = document.getElementById('app-container');
+  const container = document.getElementById("app-container");
   container.innerHTML = `
   <div class="container start" id="start">
     <button class="start-test">🚀Начать тестирование🚀</button>
-  </div>`
+  </div>`;
 
-  container.querySelector('.start-test').addEventListener('click', startTest)
+  container.querySelector(".start-test").addEventListener("click", startTest);
 }
 
 function startTest() {
   showQuestion(1);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
   showStartScreen();
 });
 
 function showQuestion(number) {
-  const currentQuestion = questions.find(item => item.number === number);
+  const currentQuestion = questions.find((item) => item.number === number);
 
-  const optionsHTML = currentQuestion.options.map((option, index) => {
-    return `<label class="option-card">
+  const optionsHTML = currentQuestion.options
+    .map((option, index) => {
+      return `<label class="option-card">
               <input type="radio" name="answer" value="null" />
               <div class="option-content">
                 <p class="option-number">${index + 1}</p>
                 <span class="option-text">${option}</span>
               </div>
             </label>`;
-  });
+    })
+    .join(" ");
 
-  const container = document.getElementById('app-container');
+  const container = document.getElementById("app-container");
 
   container.innerHTML = `
    <section class="quiz-container">
@@ -69,7 +71,14 @@ function showQuestion(number) {
       </div>
       
        <button class="submit-btn" disabled>Подтвердить ответ</button>
-    </section>`
+    </section>`;
+
+  const submitButton = document.querySelector(".submit-btn");
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+  radioButtons.forEach((value) => {
+    value.addEventListener("change", function () {
+      submitButton.removeAttribute("disabled");
+    });
+  });
 }
-
-
