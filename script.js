@@ -79,18 +79,13 @@ function showQuestion(number) {
   radioButtons.forEach((value) => {
     value.addEventListener("change", function () {
       submitButton.disabled = false;
+
+      const selectedAnswer = container.querySelector('input[name="answer"]:checked').value;
+      
+      console.log(selectedAnswer);
+      
+
+
     });
   });
-};
-
-// function handleSubmit () {
-//   const currentAnswer = document.querySelectorAll('option-text');
-  
-//   for (let el in currentAnswer) {
-//     console.log(el);
-//   }
-  
-  
-// };
-
-
+}
