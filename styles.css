@@ -152,7 +152,7 @@ body {
 }
 
 .option-card.true {
-  border-color: #00FF7F;
+  border-color: #38a169;
   background: #c1f1d4;
 }
 
@@ -243,6 +243,7 @@ body {
 
 /* Кнопка отправки */
 .submit-btn {
+  max-width: 400px;
   width: 100%;
   padding: 16px 32px;
   background: #48bb78;
@@ -274,4 +275,63 @@ body {
   box-shadow: none;
 }
 
+.stop-choise {
+  pointer-events: none;
+}
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.previous-qstn {
+  max-width: 250px;
+  width: 100%;
+  padding: 16px 32px;
+  background: #6c69a1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.previous-qstn:hover {
+  transform: translateY(-2px);
+}
+
+.previous-qstn:active {
+  transform: translateY(0);
+}
+
+.next-qstn {
+  max-width: 250px;
+  width: 100%;
+  padding: 16px 32px;
+  background: #6c69a1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+}
+
+.next-qstn:hover {
+  transform: translateY(-2px);
+}
+
+.next-qstn:active {
+  transform: translateY(0);
+}

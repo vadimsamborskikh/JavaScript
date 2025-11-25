@@ -1,5 +1,3 @@
-const numberQuestion = 1;
-
 const questions = [
   {
     number: 1,
@@ -37,6 +35,8 @@ function showStartScreen() {
   container.querySelector(".start-test").addEventListener("click", startTest);
 }
 
+let numberQuestion = 1;
+
 function startTest() {
   showQuestion(numberQuestion);
 }
@@ -73,9 +73,18 @@ function showQuestion(number) {
         ${optionsHTML}
       </div>
       
-      <div>
+      <div class="buttons">
+       <button class="previous-qstn">
+        <img src="./icons/left-arrow.svg" alt="стрелка">
+        Предыдущий вопрос
+       </button>
+
        <button class="submit-btn" disabled>Подтвердить ответ</button>
-       <button class="next-qstn">Следующий вопрос</button>
+
+       <button class="next-qstn">
+        Следующий вопрос
+        <img src="./icons/right-arrow.svg" alt="стрелка">
+       </button>
       </div>
     </section>`;
 
@@ -99,10 +108,22 @@ function showQuestion(number) {
       submitButton.addEventListener("click", () => {
         if (selectedAnswer.value === currentQuestion.correct) {
           parentSelector.classList.add("true");
+          optionCards.forEach((el) => el.classList.add('stop-choise'));
         } else {
           parentSelector.classList.add("false");
+          optionCards.forEach((el) => el.classList.add('stop-choise'));
         }
       });
     });
   });
+
+  nextButton = document.querySelector('.next-qstn');
+  nextButton.addEventListener('click', nextQuestion);
+
+  function nextQuestion() {
+    showQuestion(numberQuestion++)
+  }
 }
+
+
+
