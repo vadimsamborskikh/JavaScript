@@ -151,6 +151,16 @@ body {
   box-shadow: 0 8px 25px rgba(66, 153, 225, 0.2);
 }
 
+.option-card.true {
+  border-color: #00FF7F;
+  background: #c1f1d4;
+}
+
+.option-card.false {
+  border-color: #dd4a30;
+  background: #e0bdbb;
+}
+
 .option-card.selected .option-content::after {
   opacity: 1;
   transform: scale(1);
@@ -175,7 +185,6 @@ body {
   content: "✓";
   position: absolute;
   right: 0;
-  top: 50%;
   transform: translateY(-50%) scale(0.8);
   width: 24px;
   height: 24px;
@@ -264,3 +273,5 @@ body {
   transform: none;
   box-shadow: none;
 }
+
+

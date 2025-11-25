@@ -1,3 +1,5 @@
+const numberQuestion = 1;
+
 const questions = [
   {
     number: 1,
@@ -36,20 +38,21 @@ function showStartScreen() {
 }
 
 function startTest() {
-  showQuestion(1);
+  showQuestion(numberQuestion);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   showStartScreen();
 });
 
+// Функция показа вопроса и обработки ответа
 function showQuestion(number) {
   const currentQuestion = questions.find((item) => item.number === number);
 
   const optionsHTML = currentQuestion.options
     .map((option, index) => {
       return `<label class="option-card">
-              <input type="radio" name="answer" value="${option}" />
+              <input type="radio" name="answer" value="${option}" class="input"/>
               <div class="option-content">
                 <p class="option-number">${index + 1}</p>
                 <span class="option-text">${option}</span>
@@ -70,7 +73,10 @@ function showQuestion(number) {
         ${optionsHTML}
       </div>
       
+      <div>
        <button class="submit-btn" disabled>Подтвердить ответ</button>
+       <button class="next-qstn">Следующий вопрос</button>
+      </div>
     </section>`;
 
   const submitButton = document.querySelector(".submit-btn");
@@ -80,12 +86,23 @@ function showQuestion(number) {
     value.addEventListener("change", function () {
       submitButton.disabled = false;
 
-      const selectedAnswer = container.querySelector('input[name="answer"]:checked').value;
-      
-      console.log(selectedAnswer);
-      
+      const selectedAnswer = container.querySelector(
+        'input[name="answer"]:checked'
+      );
 
+      const optionCards = document.querySelectorAll(".option-card");
+      optionCards.forEach((acc) => acc.classList.remove("selected"));
 
+      parentSelector = selectedAnswer.closest(".option-card");
+      parentSelector.classList.add("selected");
+
+      submitButton.addEventListener("click", () => {
+        if (selectedAnswer.value === currentQuestion.correct) {
+          parentSelector.classList.add("true");
+        } else {
+          parentSelector.classList.add("false");
+        }
+      });
     });
   });
 }
