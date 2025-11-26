@@ -91,30 +91,26 @@ function showQuestion(number) {
   const submitButton = document.querySelector(".submit-btn");
   const radioButtons = document.querySelectorAll('input[type="radio"]');
 
+  let selectedAnswer = container.querySelector('input[name="answer"]:checked');
+  const answerCards = container.querySelectorAll(".option-card");
+  const selectedCard = selectedAnswer.closest(".option-card");
+  // подсвечивание выбранного ответа
   radioButtons.forEach((value) => {
     value.addEventListener("change", function () {
       submitButton.disabled = false;
-
-      const selectedAnswer = container.querySelector(
-        'input[name="answer"]:checked'
-      );
-
-      const answerCards = container.querySelectorAll(".option-card");
       answerCards.forEach((acc) => acc.classList.remove("selected"));
-
-      const selectedCard = selectedAnswer.closest(".option-card");
       selectedCard.classList.add("selected");
-
-      submitButton.addEventListener("click", () => {
-        if (selectedAnswer.value === currentQuestion.correct) {
-          selectedCard.classList.add("true");
-          answerCards.forEach((el) => (el.style.pointerEvents = "none"));
-        } else {
-          selectedCard.classList.add("false");
-          answerCards.forEach((el) => (el.style.pointerEvents = "none"));
-        }
-      });
     });
+  });
+
+  submitButton.addEventListener("click", () => {
+    if (selectedAnswer.value === currentQuestion.correct) {
+      selectedCard.classList.add("true");
+      answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+    } else {
+      selectedCard.classList.add("false");
+      answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+    }
   });
 
   const prevButton = container.querySelector(".previous-qstn");
