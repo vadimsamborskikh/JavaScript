@@ -1,21 +1,21 @@
 const questions = [
   {
     number: 1,
-    text: `Что вернет <span class="question-code">typeof null</span> в JavaScript?"`,
+    text: `Что вернет <span class="question-code">typeof null</span> в JavaScript?`,
     options: ["null", "object", "indefined"],
     correct: "object",
   },
 
   {
     number: 2,
-    text: "Какой из перечисленных вариантов не является типом данных в JavaScript?",
+    text: `Какой из перечисленных вариантов не является <span class='question-code'>типом данных</span> в JavaScript?`,
     options: ["boolean", "string", "integer"],
     correct: "integer",
   },
 
   {
     number: 3,
-    text: "Что такое переменная в JavaScript?",
+    text: `Что такое <span class='question-code'>переменная</span> в JavaScript?`,
     options: [
       "Специальный оператор для математических вычислений.",
       "Именованное хранилище данных в памяти компьютера.",
@@ -99,31 +99,49 @@ function showQuestion(number) {
         'input[name="answer"]:checked'
       );
 
-      const optionCards = document.querySelectorAll(".option-card");
-      optionCards.forEach((acc) => acc.classList.remove("selected"));
+      const answerCards = container.querySelectorAll(".option-card");
+      answerCards.forEach((acc) => acc.classList.remove("selected"));
 
-      parentSelector = selectedAnswer.closest(".option-card");
-      parentSelector.classList.add("selected");
+      const selectedCard = selectedAnswer.closest(".option-card");
+      selectedCard.classList.add("selected");
 
       submitButton.addEventListener("click", () => {
         if (selectedAnswer.value === currentQuestion.correct) {
-          parentSelector.classList.add("true");
-          optionCards.forEach((el) => el.classList.add('stop-choise'));
+          selectedCard.classList.add("true");
+          answerCards.forEach((el) => (el.style.pointerEvents = "none"));
         } else {
-          parentSelector.classList.add("false");
-          optionCards.forEach((el) => el.classList.add('stop-choise'));
+          selectedCard.classList.add("false");
+          answerCards.forEach((el) => (el.style.pointerEvents = "none"));
         }
       });
     });
   });
 
-  nextButton = document.querySelector('.next-qstn');
-  nextButton.addEventListener('click', nextQuestion);
+  const prevButton = container.querySelector(".previous-qstn");
+  const nextButton = container.querySelector(".next-qstn");
+
+  if (number === 1) {
+    prevButton.style.opacity = "0";
+    prevButton.style.pointerEvents = "none";
+  }
+
+  if (number === questions.length) {
+    nextButton.classList.add("restart-btn");
+    nextButton.innerHTML = "Завершить";
+  }
 
   function nextQuestion() {
-    showQuestion(numberQuestion++)
+    if (numberQuestion < questions.length) {
+      showQuestion((numberQuestion += 1));
+    }
   }
+
+  function previousQuestion() {
+    if (numberQuestion - 1 >= 1) {
+      showQuestion((numberQuestion -= 1));
+    }
+  }
+
+  nextButton.addEventListener("click", nextQuestion);
+  prevButton.addEventListener("click", previousQuestion);
 }
-
-
-

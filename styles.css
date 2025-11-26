@@ -275,10 +275,6 @@ body {
   box-shadow: none;
 }
 
-.stop-choise {
-  pointer-events: none;
-}
-
 .buttons {
   display: flex;
   justify-content: space-between;
@@ -299,8 +295,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: flex;
-  opacity: 0;
-  pointer-events: none;
 }
 
 .previous-qstn:hover {
@@ -334,4 +328,10 @@ body {
 
 .next-qstn:active {
   transform: translateY(0);
+}
+
+.restart-btn {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
