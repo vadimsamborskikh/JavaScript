@@ -23,6 +23,14 @@ const questions = [
     ],
     correct: "Именованное хранилище данных в памяти компьютера.",
   },
+
+  {
+    number: 4,
+    text: `Как называется механизм в JavaScript, который <span class='question-code'>позволяет функции запоминать лексическое окружение</span>?`,
+    options: [],
+    correct: "Замыкание",
+    isInput: true,
+  },
 ];
 
 function showStartScreen() {
@@ -49,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function showQuestion(number) {
   const currentQuestion = questions.find((item) => item.number === number);
 
-  const optionsHTML = currentQuestion.options
+  let optionsHTML = currentQuestion.options
     .map((option, index) => {
       return `<label class="option-card">
               <input type="radio" name="answer" value="${option}" class="input"/>
@@ -60,6 +68,8 @@ function showQuestion(number) {
             </label>`;
     })
     .join(" ");
+
+  console.log(optionsHTML);
 
   const container = document.getElementById("app-container");
 
@@ -91,19 +101,32 @@ function showQuestion(number) {
   const submitButton = document.querySelector(".submit-btn");
   const radioButtons = document.querySelectorAll('input[type="radio"]');
 
-  let selectedAnswer = container.querySelector('input[name="answer"]:checked');
-  const answerCards = container.querySelectorAll(".option-card");
-  const selectedCard = selectedAnswer.closest(".option-card");
-  // подсвечивание выбранного ответа
+  function getSelectedElements() {
+    const selectedAnswer = container.querySelector(
+      'input[name="answer"]:checked'
+    );
+    const answerCards = container.querySelectorAll(".option-card");
+    const selectedCard = selectedAnswer
+      ? selectedAnswer.closest(".option-card")
+      : null;
+
+    return { selectedAnswer, answerCards, selectedCard };
+  }
+
   radioButtons.forEach((value) => {
     value.addEventListener("change", function () {
+      const { answerCards, selectedCard } = getSelectedElements();
+
       submitButton.disabled = false;
+
       answerCards.forEach((acc) => acc.classList.remove("selected"));
+
       selectedCard.classList.add("selected");
     });
   });
 
   submitButton.addEventListener("click", () => {
+    const { selectedAnswer, answerCards, selectedCard } = getSelectedElements();
     if (selectedAnswer.value === currentQuestion.correct) {
       selectedCard.classList.add("true");
       answerCards.forEach((el) => (el.style.pointerEvents = "none"));
