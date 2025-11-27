@@ -57,19 +57,26 @@ document.addEventListener("DOMContentLoaded", function () {
 function showQuestion(number) {
   const currentQuestion = questions.find((item) => item.number === number);
 
-  let optionsHTML = currentQuestion.options
-    .map((option, index) => {
-      return `<label class="option-card">
+  let optionsHTML = null;
+
+  if (currentQuestion.isInput) {
+    optionsHTML = `<label>
+                    <input type="text" value="" class="input-answer" placeholder="Введите свой ответ" maxlength=50">
+                  </label>`
+  } else {
+    optionsHTML = currentQuestion.options
+      .map((option, index) => {
+        return `<label class="option-card">
               <input type="radio" name="answer" value="${option}" class="input"/>
               <div class="option-content">
                 <p class="option-number">${index + 1}</p>
                 <span class="option-text">${option}</span>
               </div>
             </label>`;
-    })
-    .join(" ");
+      })
+      .join(" ");
+  }
 
-  console.log(optionsHTML);
 
   const container = document.getElementById("app-container");
 
@@ -98,8 +105,9 @@ function showQuestion(number) {
       </div>
     </section>`;
 
-  const submitButton = document.querySelector(".submit-btn");
-  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  const submitButton = container.querySelector(".submit-btn");
+  const radioButtons = container.querySelectorAll('input[type="radio"]');
+  const inputField = container.querySelector('input[type="text"]');
 
   function getSelectedElements() {
     const selectedAnswer = container.querySelector(
@@ -125,8 +133,33 @@ function showQuestion(number) {
     });
   });
 
+  if (inputField) {
+    inputField.addEventListener('input', function (event) {
+      if (event.target.value.length > 0) {
+        submitButton.disabled = false;
+      } else {
+        submitButton.disabled = true;
+      }
+    })
+  }
+
+  //TODO: Сделать подтверждение ответа при вводе ответа в поле
+  // if (inputValue === currentQuestion.correct) {
+      //   inputField.classList.add('true');
+      //   inputField.style.pointerEvents = "none";
+      // } else {
+      //   inputField.classList.add('false');
+      //   inputField.style.pointerEvents = "none";
+      // }
+
   submitButton.addEventListener("click", () => {
     const { selectedAnswer, answerCards, selectedCard } = getSelectedElements();
+    if (currentQuestion.isInput) {
+      const inputValue = inputField.value;
+      console.log(inputValue);
+      
+    }
+
     if (selectedAnswer.value === currentQuestion.correct) {
       selectedCard.classList.add("true");
       answerCards.forEach((el) => (el.style.pointerEvents = "none"));
@@ -134,6 +167,8 @@ function showQuestion(number) {
       selectedCard.classList.add("false");
       answerCards.forEach((el) => (el.style.pointerEvents = "none"));
     }
+
+
   });
 
   const prevButton = container.querySelector(".previous-qstn");

@@ -55,7 +55,7 @@ body {
 .container .start-test:hover {
   color: black;
   background: #f7faff;
-  border-color: #4299e1;
+  border-color: #6c69a1;
 }
 
 .container.start:hover {
@@ -123,17 +123,17 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(59, 130, 246, 0.1),
+    rgba(108, 105, 161, 0.1),
     transparent
   );
   transition: left 0.6s;
 }
 
 .option-card:hover {
-  border-color: #4299e1;
+  border-color: #6c69a1;
   background: #f7faff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(66, 153, 225, 0.15);
+  box-shadow: 0 8px 25px rgba(108, 105, 161, 0.15);
 }
 
 .option-card:hover::before {
@@ -146,9 +146,9 @@ body {
 
 /* Состояние выбранной карточки */
 .option-card.selected {
-  border-color: #4299e1;
+  border-color: #6c69a1;
   background: #ebf8ff;
-  box-shadow: 0 8px 25px rgba(66, 153, 225, 0.2);
+  box-shadow: 0 8px 25px rgba(108, 105, 161, 0.2);
 }
 
 .option-card.true {
@@ -188,7 +188,7 @@ body {
   transform: translateY(-50%) scale(0.8);
   width: 24px;
   height: 24px;
-  background: #4299e1;
+  background: #6c69a1;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -217,8 +217,8 @@ body {
 }
 
 .option-card.selected .option-number {
-  background: #4299e1;
-  border-color: #4299e1;
+  background: #6c69a1;
+  border-color: #6c69a1;
   color: white;
 }
 
@@ -230,7 +230,7 @@ body {
 }
 
 .option-card.selected .option-text {
-  color: #2b6cb0;
+  color: #6c69a1;
 }
 
 .option-type {
@@ -334,4 +334,26 @@ body {
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.input-answer {
+  width: 100%;
+  height: 200px;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+  border-radius: 20px;
+  color: #2d3748;
+  outline: none;
+  border: 2px solid #e2e8f0;
+}
+
+.input-answer:placeholder {
+  color: #2d3748;
+}
+
+.input-answer:focus {
+  border-color: #6c69a1;
+  box-shadow: 0 8px 20px rgba(24, 24, 24, 0.3);
 }
