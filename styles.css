@@ -156,7 +156,17 @@ body {
   background: #c1f1d4;
 }
 
+.input-answer.true {
+  border-color: #38a169;
+  background: #c1f1d4;
+}
+
 .option-card.false {
+  border-color: #dd4a30;
+  background: #e0bdbb;
+}
+
+.input-answer.false {
   border-color: #dd4a30;
   background: #e0bdbb;
 }

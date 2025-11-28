@@ -4,6 +4,7 @@ const questions = [
     text: `Что вернет <span class="question-code">typeof null</span> в JavaScript?`,
     options: ["null", "object", "indefined"],
     correct: "object",
+    isInput: false,
   },
 
   {
@@ -11,6 +12,7 @@ const questions = [
     text: `Какой из перечисленных вариантов не является <span class='question-code'>типом данных</span> в JavaScript?`,
     options: ["boolean", "string", "integer"],
     correct: "integer",
+    isInput: false,
   },
 
   {
@@ -22,6 +24,7 @@ const questions = [
       "Тип данных, аналогичный массиву.",
     ],
     correct: "Именованное хранилище данных в памяти компьютера.",
+    isInput: false,
   },
 
   {
@@ -60,9 +63,9 @@ function showQuestion(number) {
   let optionsHTML = null;
 
   if (currentQuestion.isInput) {
-    optionsHTML = `<label>
+    optionsHTML = `<label class="user-input">
                     <input type="text" value="" class="input-answer" placeholder="Введите свой ответ" maxlength=50">
-                  </label>`
+                  </label>`;
   } else {
     optionsHTML = currentQuestion.options
       .map((option, index) => {
@@ -76,7 +79,6 @@ function showQuestion(number) {
       })
       .join(" ");
   }
-
 
   const container = document.getElementById("app-container");
 
@@ -114,11 +116,18 @@ function showQuestion(number) {
       'input[name="answer"]:checked'
     );
     const answerCards = container.querySelectorAll(".option-card");
+
     const selectedCard = selectedAnswer
       ? selectedAnswer.closest(".option-card")
       : null;
 
     return { selectedAnswer, answerCards, selectedCard };
+  }
+
+  function getInputArea() {
+    const inputAnswer = inputField ? inputField.closest(".user-input") : null;
+
+    return inputAnswer;
   }
 
   radioButtons.forEach((value) => {
@@ -134,41 +143,38 @@ function showQuestion(number) {
   });
 
   if (inputField) {
-    inputField.addEventListener('input', function (event) {
+    inputField.addEventListener("input", function (event) {
       if (event.target.value.length > 0) {
         submitButton.disabled = false;
       } else {
         submitButton.disabled = true;
       }
-    })
+    });
   }
-
-  //TODO: Сделать подтверждение ответа при вводе ответа в поле
-  // if (inputValue === currentQuestion.correct) {
-      //   inputField.classList.add('true');
-      //   inputField.style.pointerEvents = "none";
-      // } else {
-      //   inputField.classList.add('false');
-      //   inputField.style.pointerEvents = "none";
-      // }
 
   submitButton.addEventListener("click", () => {
     const { selectedAnswer, answerCards, selectedCard } = getSelectedElements();
-    if (currentQuestion.isInput) {
-      const inputValue = inputField.value;
-      console.log(inputValue);
-      
-    }
 
-    if (selectedAnswer.value === currentQuestion.correct) {
-      selectedCard.classList.add("true");
-      answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+    if (!currentQuestion.isInput) {
+      if (selectedAnswer.value === currentQuestion.correct) {
+        selectedCard.classList.add("true");
+        answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+      } else {
+        selectedCard.classList.add("false");
+        answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+      }
     } else {
-      selectedCard.classList.add("false");
-      answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+      let inputValue = inputField.value;
+      const selectedInput = getInputArea();
+
+      if (inputValue.toLowerCase() === currentQuestion.correct.toLowerCase()) {
+        inputField.classList.add("true");
+        selectedInput.style.pointerEvents = "none";
+      } else {
+        inputField.classList.add("false");
+        selectedInput.style.pointerEvents = "none";
+      }
     }
-
-
   });
 
   const prevButton = container.querySelector(".previous-qstn");
@@ -199,3 +205,5 @@ function showQuestion(number) {
   nextButton.addEventListener("click", nextQuestion);
   prevButton.addEventListener("click", previousQuestion);
 }
+
+//TODO: реализовать возможность завершить тест, счетчик правильных овтетов
