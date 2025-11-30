@@ -253,7 +253,6 @@ body {
 
 /* Кнопка отправки */
 .submit-btn {
-  max-width: 400px;
   width: 100%;
   padding: 16px 32px;
   background: #48bb78;
@@ -288,31 +287,7 @@ body {
 .buttons {
   display: flex;
   justify-content: space-between;
-}
-
-.previous-qstn {
-  max-width: 250px;
-  width: 100%;
-  padding: 16px 32px;
-  background: #6c69a1;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: flex;
-}
-
-.previous-qstn:hover {
-  transform: translateY(-2px);
-}
-
-.previous-qstn:active {
-  transform: translateY(0);
+  gap: 20px;
 }
 
 .next-qstn {
@@ -340,10 +315,56 @@ body {
   transform: translateY(0);
 }
 
-.restart-btn {
+.finish-btn {
+  max-width: 250px;
   width: 100%;
-  justify-content: center;
+  padding: 16px 32px;
+  background: #6c69a1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   align-items: center;
+  height: 76px;
+}
+
+.finish-btn:hover {
+  transform: translateY(-2px);
+}
+
+.finish-btn:active {
+  transform: translateY(0);
+}
+
+.restart-btn {
+  max-width: 250px;
+  width: 100%;
+  padding: 16px 32px;
+  background: #6c69a1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-items: center;
+  height: 76px;
+}
+
+.restart-btn:hover {
+  transform: translateY(-2px);
+}
+
+.restart-btn:active {
+  transform: translateY(0);
 }
 
 .input-answer {
@@ -366,4 +387,21 @@ body {
 .input-answer:focus {
   border-color: #6c69a1;
   box-shadow: 0 8px 20px rgba(24, 24, 24, 0.3);
+}
+
+.result-box {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+}
+
+.result-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.4;
 }

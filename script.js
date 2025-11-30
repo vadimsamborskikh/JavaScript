@@ -47,6 +47,8 @@ function showStartScreen() {
 }
 
 let numberQuestion = 1;
+let trueCountAnswer = 0;
+const container = document.getElementById("app-container");
 
 function startTest() {
   showQuestion(numberQuestion);
@@ -80,8 +82,9 @@ function showQuestion(number) {
       .join(" ");
   }
 
-  const container = document.getElementById("app-container");
 
+
+  //ДИНАМИЧЕСКОЕ ДОБАВЛЕНИЕ ВЕРСТКИ
   container.innerHTML = `
    <section class="quiz-container">
       <div class="question">
@@ -93,13 +96,7 @@ function showQuestion(number) {
       </div>
       
       <div class="buttons">
-       <button class="previous-qstn">
-        <img src="./icons/left-arrow.svg" alt="стрелка">
-        Предыдущий вопрос
-       </button>
-
        <button class="submit-btn" disabled>Подтвердить ответ</button>
-
        <button class="next-qstn">
         Следующий вопрос
         <img src="./icons/right-arrow.svg" alt="стрелка">
@@ -152,13 +149,15 @@ function showQuestion(number) {
     });
   }
 
+
+  // ОБРАБОТЧКИ КНОПКИ "ПОДТВЕРДИТЬ"
   submitButton.addEventListener("click", () => {
     const { selectedAnswer, answerCards, selectedCard } = getSelectedElements();
-
     if (!currentQuestion.isInput) {
       if (selectedAnswer.value === currentQuestion.correct) {
         selectedCard.classList.add("true");
         answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+        trueCountAnswer++;
       } else {
         selectedCard.classList.add("false");
         answerCards.forEach((el) => (el.style.pointerEvents = "none"));
@@ -170,6 +169,7 @@ function showQuestion(number) {
       if (inputValue.toLowerCase() === currentQuestion.correct.toLowerCase()) {
         inputField.classList.add("true");
         selectedInput.style.pointerEvents = "none";
+        trueCountAnswer++;
       } else {
         inputField.classList.add("false");
         selectedInput.style.pointerEvents = "none";
@@ -177,18 +177,17 @@ function showQuestion(number) {
     }
   });
 
-  const prevButton = container.querySelector(".previous-qstn");
+  // КНОПКИ
   const nextButton = container.querySelector(".next-qstn");
 
-  if (number === 1) {
-    prevButton.style.opacity = "0";
-    prevButton.style.pointerEvents = "none";
-  }
 
   if (number === questions.length) {
-    nextButton.classList.add("restart-btn");
+    nextButton.classList.remove('next-qstn')
+    nextButton.classList.add("finish-btn");
     nextButton.innerHTML = "Завершить";
   }
+
+  const finishButton = container.querySelector(".finish-btn");
 
   function nextQuestion() {
     if (numberQuestion < questions.length) {
@@ -196,14 +195,24 @@ function showQuestion(number) {
     }
   }
 
-  function previousQuestion() {
-    if (numberQuestion - 1 >= 1) {
-      showQuestion((numberQuestion -= 1));
-    }
-  }
-
   nextButton.addEventListener("click", nextQuestion);
-  prevButton.addEventListener("click", previousQuestion);
-}
 
-//TODO: реализовать возможность завершить тест, счетчик правильных овтетов
+  if (finishButton) {
+    finishButton.addEventListener('click', () => {
+      container.innerHTML = `
+    <section class="result-container">
+      <div class="result-box">
+        <p class="result-text">Твой результат: <span class='question-code'>${trueCountAnswer} из ${questions.length}</span>.</p>
+        <button class="restart-btn">Начать заново</button>
+      </div>
+    </section>`
+
+      const restartButton = container.querySelector('.restart-btn');
+
+      restartButton.addEventListener('click', () => {
+        numberQuestion = 1;
+        showQuestion(numberQuestion);
+      })
+    })
+  }
+}
