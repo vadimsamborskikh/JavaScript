@@ -67,7 +67,8 @@ function showQuestion(number) {
   if (currentQuestion.isInput) {
     optionsHTML = `<label class="user-input">
                     <input type="text" value="" class="input-answer" placeholder="Введите свой ответ" maxlength=50">
-                  </label>`;
+                  </label>
+                  `
   } else {
     optionsHTML = currentQuestion.options
       .map((option, index) => {
@@ -77,16 +78,35 @@ function showQuestion(number) {
                 <p class="option-number">${index + 1}</p>
                 <span class="option-text">${option}</span>
               </div>
-            </label>`;
+            </label>
+            `
       })
       .join(" ");
   }
 
+  function startTimer() {
+    let time = 10;
+    const timerElement = document.getElementById("countdown")
+    const { answerCards } = getSelectedElements();
+
+    const timer = setInterval(() => {
+      if (time <= 0) {
+        clearInterval(timer);
+        answerCards.forEach((el) => (el.style.pointerEvents = "none"));
+      } else {
+        time--;
+        timerElement.textContent = time;
+      }
+    }, 1000);
+  }
+
+  const timerHTML = `<p id="countdown">10</p>`
 
 
   //ДИНАМИЧЕСКОЕ ДОБАВЛЕНИЕ ВЕРСТКИ
   container.innerHTML = `
    <section class="quiz-container">
+      ${timerHTML}
       <div class="question">
         <p class="question">Вопрос №${currentQuestion.number}. ${currentQuestion.text}</p>
       </div>
@@ -103,6 +123,7 @@ function showQuestion(number) {
        </button>
       </div>
     </section>`;
+
 
   const submitButton = container.querySelector(".submit-btn");
   const radioButtons = container.querySelectorAll('input[type="radio"]');
@@ -177,6 +198,8 @@ function showQuestion(number) {
     }
   });
 
+  startTimer()
+
   // КНОПКИ
   const nextButton = container.querySelector(".next-qstn");
 
@@ -199,20 +222,37 @@ function showQuestion(number) {
 
   if (finishButton) {
     finishButton.addEventListener('click', () => {
+      const bestScore = Number(window.localStorage.getItem('bestScore')) || 0;
+
+      if (trueCountAnswer > bestScore) {
+        window.localStorage.setItem('bestScore', trueCountAnswer)
+      }
+
       container.innerHTML = `
     <section class="result-container">
       <div class="result-box">
         <p class="result-text">Твой результат: <span class='question-code'>${trueCountAnswer} из ${questions.length}</span>.</p>
+        <p class="result-text">Твой лучший результат: <span class='question-code'>${bestScore}</span>.</p>
+        <button class="restart-score">Обнулить рекорд</button>
         <button class="restart-btn">Начать заново</button>
       </div>
     </section>`
 
       const restartButton = container.querySelector('.restart-btn');
+      const restartScoreButton = container.querySelector('.restart-score');
 
       restartButton.addEventListener('click', () => {
         numberQuestion = 1;
+        trueCountAnswer = 0;
         showQuestion(numberQuestion);
+      })
+
+      restartScoreButton.addEventListener('click', () => {
+        window.localStorage.setItem('bestScore', 0);
+        alert('Значение текущего рекорда сброшено! Начните тест заново.');
       })
     })
   }
+
+
 }
